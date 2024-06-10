@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+>
+    <changeSet id="1" author="rafael.ramos">
+        <sql dbms="oracle">
+
+            -- Creating Person Table.
+            CREATE TABLE PERSON (
+                id  numeric NOT NULL,
+                first_name VARCHAR(80) NOT NULL,
+                last_name VARCHAR(80) NOT NULL,
+                address VARCHAR(100) NOT NULL,
+                gender VARCHAR(6) NOT NULL,
+                PRIMARY KEY (id)
+            );
+
+
+            -- Person Sequence
+            CREATE SEQUENCE seq_person
+                MINVALUE 1
+                MAXVALUE 9999999999
+                INCREMENT BY 1
+                START WITH 1
+                CACHE 20;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

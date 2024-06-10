@@ -1,6 +1,7 @@
 package com.study.rafael.curso_rest_spring.controllers;
 
 import com.study.rafael.curso_rest_spring.dto.v1.PersonDTO;
+import com.study.rafael.curso_rest_spring.dto.v2.PersonDTOV2;
 import com.study.rafael.curso_rest_spring.entities.PersonEntity;
 import com.study.rafael.curso_rest_spring.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/v1/person")
 public class PersonController {
 
     @Autowired
@@ -31,6 +32,12 @@ public class PersonController {
     public PersonDTO create(@RequestBody PersonDTO person) {
         return this.personServices.create(person);
     }
+
+    // EXEMPLO de endpoint versionado /v2
+    //  @PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    //    public PersonDTOV2 createV2(@RequestBody PersonDTOV2 person) {
+    //    return this.personServices.createV2(person);
+    //  }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonDTO update(@RequestBody PersonDTO person) {

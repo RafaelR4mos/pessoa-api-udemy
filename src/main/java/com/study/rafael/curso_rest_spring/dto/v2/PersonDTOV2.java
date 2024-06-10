@@ -1,37 +1,31 @@
-package com.study.rafael.curso_rest_spring.entities;
+package com.study.rafael.curso_rest_spring.dto.v2;
 
-import jakarta.persistence.*;
 
-@Entity
-@Table(name = "person")
-public class PersonEntity {
+public class PersonDTOV2 {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PERSON_SEQ")
-    @SequenceGenerator(name = "PERSON_SEQ", sequenceName = "seq_person", allocationSize = 1)
     private Long id;
 
-    @Column(name = "first_name", nullable = false, length = 80)
+
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 80)
     private String lastName;
 
-    @Column(nullable = false, length = 100)
     private String address;
 
-    @Column(nullable = false, length = 6)
     private String gender;
 
-    public PersonEntity(Long id, String firstName, String lastName, String address, String gender) {
+    private String birthDate;
+
+    public PersonDTOV2(Long id, String firstName, String lastName, String address, String gender, String birthDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.gender = gender;
+        this.birthDate = birthDate;
     }
 
-    public PersonEntity() {
+    public PersonDTOV2() {
 
     }
 
@@ -73,5 +67,13 @@ public class PersonEntity {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getBirthDate() {
+        return this.birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 }

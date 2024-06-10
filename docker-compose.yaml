@@ -1,0 +1,9 @@
+services:
+  database:
+    container_name: pessoa_api_bd_oracle
+    image: "oracle/database:19.3.0-ee"
+    ports:
+      - 1521:1521
+    environment:
+      - ORACLE_PDB=ORCLPDB1
+      - ORACLE_PWD=oracle
