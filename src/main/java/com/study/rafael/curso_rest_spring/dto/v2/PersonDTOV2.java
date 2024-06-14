@@ -1,6 +1,8 @@
 package com.study.rafael.curso_rest_spring.dto.v2;
 
 
+import com.study.rafael.curso_rest_spring.enums.Gender;
+
 public class PersonDTOV2 {
 
     private Long id;
@@ -12,11 +14,11 @@ public class PersonDTOV2 {
 
     private String address;
 
-    private String gender;
+    private Gender gender;
 
     private String birthDate;
 
-    public PersonDTOV2(Long id, String firstName, String lastName, String address, String gender, String birthDate) {
+    public PersonDTOV2(Long id, String firstName, String lastName, String address, Gender gender, String birthDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -61,11 +63,11 @@ public class PersonDTOV2 {
         this.address = address;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return this.gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

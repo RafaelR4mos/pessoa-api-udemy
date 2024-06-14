@@ -1,6 +1,6 @@
 package com.study.rafael.curso_rest_spring.unittests.services;
 
-import com.study.rafael.curso_rest_spring.dto.v1.PersonDTO;
+import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonDTO;
 import com.study.rafael.curso_rest_spring.entities.PersonEntity;
 import com.study.rafael.curso_rest_spring.repositories.PersonRepository;
 import com.study.rafael.curso_rest_spring.services.PersonServices;

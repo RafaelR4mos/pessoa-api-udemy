@@ -1,9 +1,9 @@
-package com.study.rafael.curso_rest_spring.dto.v1;
+package com.study.rafael.curso_rest_spring.dto.v1.Person;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.study.rafael.curso_rest_spring.enums.Gender;
 
 //Muda a ordem em que as propriedades aparecem no JSON.
 @JsonPropertyOrder({ "id", "firstName", "lastName",  "address", "gender" })
@@ -20,10 +20,10 @@ public class PersonDTO {
 
     private String address;
 
-    @JsonIgnore
-    private String gender;
+    //@JsonIgnore can hide the propery in JSON.
+    private Gender gender;
 
-    public PersonDTO(Long id, String firstName, String lastName, String address, String gender) {
+    public PersonDTO(Long id, String firstName, String lastName, String address, Gender gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -67,11 +67,11 @@ public class PersonDTO {
         this.address = address;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return this.gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 }

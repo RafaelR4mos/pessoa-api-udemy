@@ -1,9 +1,12 @@
 package com.study.rafael.curso_rest_spring.services;
 
-import com.study.rafael.curso_rest_spring.dto.v1.PersonDTO;
+import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonCreateDTO;
+import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonDTO;
 import com.study.rafael.curso_rest_spring.dto.v2.PersonDTOV2;
 import com.study.rafael.curso_rest_spring.entities.PersonEntity;
+import com.study.rafael.curso_rest_spring.enums.Gender;
 import com.study.rafael.curso_rest_spring.exceptions.ResourceNotFoundException;
+import com.study.rafael.curso_rest_spring.exceptions.handler.RegraDeNegocioException;
 import com.study.rafael.curso_rest_spring.mapper.Mapper;
 import com.study.rafael.curso_rest_spring.mapper.customMappers.PersonMapper;
 import com.study.rafael.curso_rest_spring.repositories.PersonRepository;
@@ -31,7 +34,7 @@ public class PersonServices {
         return Mapper.parseObject(foundPerson, PersonDTO.class);
     }
 
-    public PersonDTO create(PersonDTO personDTO) {
+    public PersonDTO create(PersonCreateDTO personDTO)  {
 
         PersonEntity entity = Mapper.parseObject(personDTO, PersonEntity.class);
 

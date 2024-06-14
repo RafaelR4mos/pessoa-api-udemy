@@ -1,8 +1,8 @@
 package com.study.rafael.curso_rest_spring.controllers;
 
-import com.study.rafael.curso_rest_spring.dto.v1.PersonDTO;
-import com.study.rafael.curso_rest_spring.dto.v2.PersonDTOV2;
-import com.study.rafael.curso_rest_spring.entities.PersonEntity;
+import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonCreateDTO;
+import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonDTO;
+import com.study.rafael.curso_rest_spring.exceptions.handler.RegraDeNegocioException;
 import com.study.rafael.curso_rest_spring.services.PersonServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -68,7 +69,7 @@ public class PersonController {
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
     })
-    public PersonDTO create(@RequestBody PersonDTO person) {
+    public PersonDTO create(@RequestBody @Valid PersonCreateDTO person) {
         return this.personServices.create(person);
     }
 

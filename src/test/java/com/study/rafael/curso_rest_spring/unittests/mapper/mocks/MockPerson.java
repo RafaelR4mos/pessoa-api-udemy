@@ -1,7 +1,8 @@
 package com.study.rafael.curso_rest_spring.unittests.mapper.mocks;
 
-import com.study.rafael.curso_rest_spring.dto.v1.PersonDTO;
+import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonDTO;
 import com.study.rafael.curso_rest_spring.entities.PersonEntity;
+import com.study.rafael.curso_rest_spring.enums.Gender;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class MockPerson {
         PersonEntity person = new PersonEntity();
         person.setAddress("Address Test" + number);
         person.setFirstName("First Name Test" + number);
-        person.setGender(((number % 2)==0) ? "Male" : "Female");
+        person.setGender(((number % 2)==0) ? Gender.MALE : Gender.FEMALE);
         person.setLastName("Last Name Test" + number);
         return person;
     }
@@ -48,7 +49,7 @@ public class MockPerson {
         PersonDTO person = new PersonDTO();
         person.setAddress("Address Test" + number);
         person.setFirstName("First Name Test" + number);
-        person.setGender(((number % 2)==0) ? "Male" : "Female");
+        person.setGender(((number % 2)==0) ? Gender.MALE : Gender.FEMALE);
         person.setId(number.longValue());
         person.setLastName("Last Name Test" + number);
         return person;

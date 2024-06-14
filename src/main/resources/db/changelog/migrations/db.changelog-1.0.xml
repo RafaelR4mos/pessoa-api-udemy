@@ -28,4 +28,41 @@
                 CACHE 20;
         </sql>
     </changeSet>
+
+    <changeSet id="2" author="rafael.ramos">
+        <sql dbms="oracle">
+            INSERT INTO Person Values(seq_person.NEXTVAL, 'John', 'Snow', 'Winterfel', 'MALE');
+            INSERT INTO Person Values(seq_person.NEXTVAL, 'Daenerys', 'Targaryen', 'Dragon Rock', 'FEMALE');
+            INSERT INTO Person Values(seq_person.NEXTVAL, 'Cersei', 'Lannister', 'Casterly Rock', 'FEMALE');
+        </sql>
+    </changeSet>
+
+    <changeSet id="3" author="rafael.ramos">
+        <sql dbms="oracle">
+            CREATE TABLE BOOK (
+                id NUMERIC NOT NULL,
+                title VARCHAR(200) NOT NULL,
+                author VARCHAR(200) NOT NULL,
+                publisher VARCHAR(200) NOT NULL,
+                isbn VARCHAR(20) NOT NULL UNIQUE,
+                price NUMBER(10,2),
+                PRIMARY KEY(id)
+            );
+
+            CREATE SEQUENCE seq_book
+                MINVALUE 1
+                MAXVALUE 9999999999
+                INCREMENT BY 1
+                START WITH 1
+                CACHE 20;
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="rafael.ramos">
+        <sql dbms="oracle">
+            INSERT INTO BOOK VALUES(seq_book.NEXTVAL, 'Guerra dos tronos', 'George R. Martin', 'Leya', '978-3-16-148410-0', 55.50);
+            INSERT INTO BOOK VALUES(seq_book.NEXTVAL, 'Não me faça pensar', 'Steve Krug', 'Alta books', '999-1-10-148410-0', 29.99);
+            INSERT INTO BOOK VALUES(seq_book.NEXTVAL, '1984', 'George Orwel', 'Bom livro', '111-3-15-148480-6', 44.99);
+        </sql>
+    </changeSet>
 </databaseChangeLog>

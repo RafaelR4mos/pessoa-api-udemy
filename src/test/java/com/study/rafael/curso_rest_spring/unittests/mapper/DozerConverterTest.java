@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import com.study.rafael.curso_rest_spring.dto.v1.PersonDTO;
+import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonDTO;
 import com.study.rafael.curso_rest_spring.entities.PersonEntity;
 import com.study.rafael.curso_rest_spring.mapper.Mapper;
 import com.study.rafael.curso_rest_spring.unittests.mapper.mocks.MockPerson;
