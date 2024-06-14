@@ -1,7 +1,4 @@
 package com.study.rafael.curso_rest_spring.dto.v1.Person;
-
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.study.rafael.curso_rest_spring.enums.Gender;
 

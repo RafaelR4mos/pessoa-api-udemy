@@ -2,6 +2,7 @@ package com.study.rafael.curso_rest_spring.controllers;
 
 import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonCreateDTO;
 import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonDTO;
+import com.study.rafael.curso_rest_spring.dto.v2.PersonDTOV2;
 import com.study.rafael.curso_rest_spring.exceptions.handler.RegraDeNegocioException;
 import com.study.rafael.curso_rest_spring.services.PersonServices;
 import io.swagger.v3.oas.annotations.Operation;
@@ -74,10 +75,10 @@ public class PersonController {
     }
 
     // EXEMPLO de endpoint versionado /v2
-    //  @PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    //    public PersonDTOV2 createV2(@RequestBody PersonDTOV2 person) {
-    //    return this.personServices.createV2(person);
-    //  }
+      @PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        public PersonDTOV2 createV2(@RequestBody PersonDTOV2 person) {
+        return this.personServices.createV2(person);
+      }
 
     @PutMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
@@ -95,7 +96,8 @@ public class PersonController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    @Operation(summary = "Deletes a person", description = "Deletes a person via URL id parameter")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
         this.personServices.delete(id);
         return ResponseEntity.noContent().build();
     }

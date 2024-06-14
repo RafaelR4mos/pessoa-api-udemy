@@ -1,36 +1,19 @@
-package com.study.rafael.curso_rest_spring.entities;
+package com.study.rafael.curso_rest_spring.dto.v1.Book;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "book")
-public class BookEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOOK_SEQ")
-    @SequenceGenerator(name = "BOOK_SEQ", sequenceName = "seq_book", allocationSize = 1)
+public class BookDTO {
     private Long id;
 
-    @Column(nullable = false, length = 200)
     private String title;
 
-    @Column(nullable = false, length = 200)
     private String author;
 
-    @Column(nullable = false, length = 200)
     private String publisher;
 
-    @Column(nullable = false, length = 20)
     private String isbn;
 
-    @Column(nullable = false)
     private Double price;
 
-    public BookEntity() {
-
-    }
-
-    public BookEntity(Long id, String title, String author, String publisher, String isbn, Double price) {
+    public BookDTO(Long id, String title, String author, String publisher, String isbn, Double price) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -38,6 +21,8 @@ public class BookEntity {
         this.isbn = isbn;
         this.price = price;
     }
+
+    public BookDTO() {}
 
     public Long getId() {
         return this.id;
