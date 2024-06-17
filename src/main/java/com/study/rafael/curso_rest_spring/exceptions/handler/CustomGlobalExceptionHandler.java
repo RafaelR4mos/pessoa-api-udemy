@@ -1,5 +1,6 @@
 package com.study.rafael.curso_rest_spring.exceptions.handler;
 import com.study.rafael.curso_rest_spring.exceptions.ExceptionResponse;
+import com.study.rafael.curso_rest_spring.exceptions.RequiredObjectIsNullException;
 import com.study.rafael.curso_rest_spring.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
@@ -72,5 +73,17 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         );
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RequiredObjectIsNullException.class)
+    public ResponseEntity<ExceptionResponse> handleBadRequestException(Exception ex, WebRequest request) {
+
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 }

@@ -5,6 +5,7 @@ import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonDTO;
 import com.study.rafael.curso_rest_spring.dto.v2.PersonDTOV2;
 import com.study.rafael.curso_rest_spring.entities.PersonEntity;
 import com.study.rafael.curso_rest_spring.enums.Gender;
+import com.study.rafael.curso_rest_spring.exceptions.RequiredObjectIsNullException;
 import com.study.rafael.curso_rest_spring.exceptions.ResourceNotFoundException;
 import com.study.rafael.curso_rest_spring.exceptions.handler.RegraDeNegocioException;
 import com.study.rafael.curso_rest_spring.mapper.Mapper;
@@ -34,7 +35,8 @@ public class PersonServices {
         return Mapper.parseObject(foundPerson, PersonDTO.class);
     }
 
-    public PersonDTO create(PersonCreateDTO personDTO)  {
+    public PersonDTO create(PersonCreateDTO personDTO) {
+        if (personDTO == null) throw new RequiredObjectIsNullException();
 
         PersonEntity entity = Mapper.parseObject(personDTO, PersonEntity.class);
 
@@ -49,12 +51,14 @@ public class PersonServices {
     }
 
     public PersonDTO update(PersonDTO person) {
-       PersonEntity personFound = personRepository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
+        if (person == null) throw new RequiredObjectIsNullException();
 
-       personFound.setFirstName(person.getFirstName());
-       personFound.setLastName(person.getLastName());
-       personFound.setAddress(person.getAddress());
-       personFound.setGender(person.getGender());
+        PersonEntity personFound = personRepository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
+
+        personFound.setFirstName(person.getFirstName());
+        personFound.setLastName(person.getLastName());
+        personFound.setAddress(person.getAddress());
+        personFound.setGender(person.getGender());
 
         return Mapper.parseObject(personRepository.save(personFound), PersonDTO.class);
     }

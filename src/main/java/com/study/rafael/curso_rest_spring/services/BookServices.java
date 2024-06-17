@@ -6,6 +6,7 @@ import com.study.rafael.curso_rest_spring.entities.BookEntity;
 import com.study.rafael.curso_rest_spring.exceptions.ResourceNotFoundException;
 import com.study.rafael.curso_rest_spring.mapper.Mapper;
 import com.study.rafael.curso_rest_spring.repositories.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,11 +14,8 @@ import java.util.List;
 @Service
 public class BookServices {
 
-    private final BookRepository bookRepository;
-
-    public BookServices(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    @Autowired
+    private BookRepository bookRepository;
 
     public List<BookDTO> findAll() {
         return Mapper.parseListObjects(this.bookRepository.findAll(), BookDTO.class);
