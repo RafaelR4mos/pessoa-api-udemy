@@ -18,6 +18,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,6 +41,39 @@ public class BookServicesTest {
     void setUpMocks() {
         input = new MockBook();
         MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void testFindAll() {
+        List<BookEntity> entityList = input.mockEntityList(10);
+
+        when(this.repository.findAll()).thenReturn(entityList);
+
+        List<BookDTO> result = this.service.findAll();
+
+        assertNotNull(result);
+        assertEquals(10, result.size());
+
+        BookDTO bookTwo = result.get(1);
+        assertEquals("Title Test2", bookTwo.getTitle());
+        assertEquals("Author Test2", bookTwo.getAuthor());
+        assertEquals("Isbn Test2", bookTwo.getIsbn());
+        assertEquals("Publisher Test2", bookTwo.getPublisher());
+        assertEquals(2.0, bookTwo.getPrice());
+
+        BookDTO bookThree = result.get(2);
+        assertEquals("Title Test3", bookThree.getTitle());
+        assertEquals("Author Test3", bookThree.getAuthor());
+        assertEquals("Isbn Test3", bookThree.getIsbn());
+        assertEquals("Publisher Test3", bookThree.getPublisher());
+        assertEquals(3.0, bookThree.getPrice());
+
+        BookDTO bookTen = result.get(9);
+        assertEquals("Title Test10", bookTen.getTitle());
+        assertEquals("Author Test10", bookTen.getAuthor());
+        assertEquals("Isbn Test10", bookTen.getIsbn());
+        assertEquals("Publisher Test10", bookTen.getPublisher());
+        assertEquals(10.0, bookTen.getPrice());
     }
 
     @Test

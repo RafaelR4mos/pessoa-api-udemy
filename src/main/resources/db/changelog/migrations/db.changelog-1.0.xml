@@ -65,4 +65,82 @@
             INSERT INTO BOOK VALUES(seq_book.NEXTVAL, '1984', 'George Orwel', 'Bom livro', '111-3-15-148480-6', 44.99);
         </sql>
     </changeSet>
+
+    <changeSet id="5" author="rafael.ramos">
+        <sql dbms="oracle">
+            CREATE TABLE permission (
+                id number(20) NOT NULL,
+                description varchar(255) DEFAULT NULL,
+                PRIMARY KEY(id)
+            );
+
+            CREATE SEQUENCE seq_permission
+                MINVALUE 1
+                MAXVALUE 9999999999
+                INCREMENT BY 1
+                START WITH 1
+                CACHE 20;
+        </sql>
+    </changeSet>
+
+    <changeSet id="6" author="rafael.ramos">
+        <sql dbms="oracle">
+            INSERT INTO permission VALUES (seq_permission.NEXTVAL, 'ADMIN');
+            INSERT INTO permission VALUES (seq_permission.NEXTVAL, 'MANAGER');
+            INSERT INTO permission VALUES (seq_permission.NEXTVAL, 'COMMON_USER');
+        </sql>
+    </changeSet>
+
+    <changeSet id="7" author="rafael.ramos">
+        <sql dbms="oracle">
+            CREATE TABLE users (
+                id number(20) NOT NULL,
+                user_name varchar(255) DEFAULT NULL,
+                full_name varchar(255) DEFAULT NULL,
+                password varchar(255) DEFAULT NULL,
+                account_non_expired number(1) DEFAULT NULL,
+                account_non_locked number(1) DEFAULT NULL,
+                credentials_non_expired number(1) DEFAULT NULL,
+                enabled number(1) DEFAULT NULL,
+                PRIMARY KEY(id),
+                CONSTRAINT uk_user_name UNIQUE (user_name)
+            );
+
+            CREATE SEQUENCE seq_users
+                MINVALUE 1
+                MAXVALUE 9999999999
+                INCREMENT BY 1
+                START WITH 1
+                CACHE 20;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="8" author="rafael.ramos">
+        <sql dbms="oracle">
+            INSERT INTO users VALUES (seq_users.NEXTVAL, 'RafaelR4mos', 'Rafael Ramos dos Santos', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 1, 1, 1, 1);
+            INSERT INTO users VALUES (seq_users.NEXTVAL, 'RafaelSantos', 'Rafael Ramos Santos', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 1, 1, 1, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="9" author="rafael.ramos">
+        <sql dbms="oracle">
+            CREATE TABLE user_permission (
+                id_user number(20) NOT NULL,
+                id_permission number(20) NOT NULL,
+                PRIMARY KEY(id_user, id_permission),
+                CONSTRAINT fk_user_permission FOREIGN KEY (id_user) REFERENCES users(id),
+                CONSTRAINT fk_user_permission_permission FOREIGN KEY (id_permission) REFERENCES permission(id)
+            );
+
+            CREATE INDEX index_user_permission_permission on user_permission(id_permission);
+        </sql>
+    </changeSet>
+
+    <changeSet id="10" author="rafael.ramos">
+        <sql dbms="oracle">
+            INSERT INTO user_permission VALUES (1, 1);
+            INSERT INTO user_permission VALUES (1, 2);
+            INSERT INTO user_permission VALUES (2, 1);
+        </sql>
+    </changeSet>
 </databaseChangeLog>

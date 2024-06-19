@@ -1,5 +1,6 @@
 package com.study.rafael.curso_rest_spring.unittests.services;
 
+import com.study.rafael.curso_rest_spring.dto.v1.Book.BookDTO;
 import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonCreateDTO;
 import com.study.rafael.curso_rest_spring.dto.v1.Person.PersonDTO;
 import com.study.rafael.curso_rest_spring.entities.PersonEntity;
@@ -18,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,6 +42,36 @@ public class PersonServicesTest {
     void setUpMocks() throws Exception {
         input = new MockPerson();
         MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void testFindAll() {
+        List<PersonEntity> personEntityList = input.mockEntityList();
+
+        when(this.repository.findAll()).thenReturn(personEntityList);
+
+        List<PersonDTO> result = this.service.findAll();
+
+        assertNotNull(result);
+        assertEquals(14, result.size());
+
+        PersonDTO personOne = result.get(1);
+        assertEquals("Address Test1", personOne.getAddress());
+        assertEquals("First Name Test1", personOne.getFirstName());
+        assertEquals("Last Name Test1", personOne.getLastName());
+        assertEquals(Gender.FEMALE, personOne.getGender());
+
+        PersonDTO personSeven = result.get(7);
+        assertEquals("Address Test7", personSeven.getAddress());
+        assertEquals("First Name Test7", personSeven.getFirstName());
+        assertEquals("Last Name Test7", personSeven.getLastName());
+        assertEquals(Gender.FEMALE, personSeven.getGender());
+
+        PersonDTO personTwelve = result.get(12);
+        assertEquals("Address Test12", personTwelve.getAddress());
+        assertEquals("First Name Test12", personTwelve.getFirstName());
+        assertEquals("Last Name Test12", personTwelve.getLastName());
+        assertEquals(Gender.MALE, personTwelve.getGender());
     }
 
     @Test

@@ -52,7 +52,7 @@ public class MockBook {
 
     public List<BookEntity> mockEntityList(Integer itemsQuantity) {
         List<BookEntity> books = new ArrayList<>();
-        for(int i = 0; i < itemsQuantity; i++) {
+        for(int i = 1; i <= itemsQuantity; i++) {
             books.add(mockEntity(i));
         }
 
