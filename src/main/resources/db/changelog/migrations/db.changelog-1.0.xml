@@ -143,4 +143,24 @@
             INSERT INTO user_permission VALUES (2, 1);
         </sql>
     </changeSet>
+
+    <changeSet id="11" author="rafael.ramos">
+        <sql dbms="oracle">
+            DROP TABLE users CASCADE CONSTRAINTS;
+            DROP TABLE user_permission CASCADE CONSTRAINTS;
+            DROP TABLE permission CASCADE CONSTRAINTS;
+        </sql>
+    </changeSet>
+
+    <changeSet id="12" author="rafael.ramos">
+        <sql dbms="oracle">
+           CREATE TABLE users (
+                id VARCHAR(255) NOT NULL,
+                login VARCHAR(255) NOT NULL,
+                password VARCHAR(255) NOT NULL,
+                role VARCHAR(255) NOT NULL,
+                PRIMARY KEY(id)
+            );
+        </sql>
+    </changeSet>
 </databaseChangeLog>

@@ -76,6 +76,7 @@ public class PersonController {
 
     // EXEMPLO de endpoint versionado /v2
       @PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+      @Operation(hidden = true)
         public PersonDTOV2 createV2(@RequestBody PersonDTOV2 person) {
         return this.personServices.createV2(person);
       }
