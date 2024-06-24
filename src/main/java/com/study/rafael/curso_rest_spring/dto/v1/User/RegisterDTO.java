@@ -6,12 +6,10 @@ public class RegisterDTO {
 
     private String login;
     private String password;
-    private UserRole role;
 
     RegisterDTO(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
-        this.role = role;
     }
 
     public String getLogin() {
@@ -28,13 +26,5 @@ public class RegisterDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
     }
 }

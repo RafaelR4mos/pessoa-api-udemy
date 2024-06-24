@@ -163,4 +163,62 @@
             );
         </sql>
     </changeSet>
+
+    <changeSet id="13" author="rafael.ramos">
+        <sql dbms="oracle">
+            CREATE TABLE permission (
+                id number(20) NOT NULL,
+                description varchar(255) DEFAULT NULL,
+                PRIMARY KEY(id)
+            );
+
+            CREATE TABLE user_permission (
+                id_user varchar(255) NOT NULL,
+                id_permission number(20) NOT NULL,
+                PRIMARY KEY(id_user, id_permission),
+                CONSTRAINT fk_user_permission FOREIGN KEY (id_user) REFERENCES users(id),
+                CONSTRAINT fk_user_permission_permission FOREIGN KEY (id_permission) REFERENCES permission(id)
+            );
+
+            CREATE INDEX index_user_permission_permission on user_permission(id_permission);
+        </sql>
+    </changeSet>
+
+    <changeSet id="14" author="rafael.ramos">
+        <sql dbms="oracle">
+            ALTER TABLE users DROP COLUMN role;
+        </sql>
+    </changeSet>
+
+    <changeSet id="15" author="rafael.ramos">
+        <sql>
+            CREATE SEQUENCE seq_permission
+            START WITH 1
+            INCREMENT BY 1
+            NOCACHE
+            NOCYCLE;
+
+            INSERT INTO permission VALUES(seq_permission.NEXTVAL, 'ROLE_ADMIN');
+            INSERT INTO permission VALUES(seq_permission.NEXTVAL, 'ROLE_USER');
+        </sql>
+    </changeSet>
+
+    <changeSet id="16" author="rafael.ramos">
+        <sql dbms="oracle">
+            -- Cria usuário admin com base em usuário existente
+            INSERT INTO user_permission VALUES('145d13e0-02bf-459d-8193-022e6d7fd005', 1);
+            INSERT INTO user_permission VALUES('145d13e0-02bf-459d-8193-022e6d7fd005', 2);
+
+            -- Cria usuário básico com base em usuário existente
+            INSERT INTO user_permission VALUES('3701608f-8332-4240-bda8-09b5964f9d45', 1);
+            INSERT INTO user_permission VALUES('3701608f-8332-4240-bda8-09b5964f9d45', 2);
+        </sql>
+    </changeSet>
+
+    <changeSet id="17" author="rafael.ramos">
+        <sql dbms="oracle">
+            -- Cria usuário básico com base em usuário existente
+            INSERT INTO user_permission VALUES('0369798a-8949-49b1-8c90-3bbebb80d700', 2);
+        </sql>
+    </changeSet>
 </databaseChangeLog>

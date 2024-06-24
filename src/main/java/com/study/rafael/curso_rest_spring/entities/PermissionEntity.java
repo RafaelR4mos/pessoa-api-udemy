@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "permission")
-public class Permission implements GrantedAuthority {
+public class PermissionEntity implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PERMISSION_SEQ")
@@ -14,7 +14,6 @@ public class Permission implements GrantedAuthority {
 
     private String description;
 
-    public Permission() {}
 
     @Override
     public String getAuthority() {
@@ -22,7 +21,7 @@ public class Permission implements GrantedAuthority {
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -30,10 +29,11 @@ public class Permission implements GrantedAuthority {
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 }
+
